@@ -38,7 +38,7 @@ _pending_
 4. Create a new virtual enviroment
 
 ```bash
-    python3.6 -m virtualenv <environment_name>
+python3.6 -m virtualenv <environment_name>
 ```
 
 5. Activate the environment
