@@ -3,6 +3,8 @@
 ## What is G SIM?
 G SIM is a simple Newtonian physics simulator for modelling planetary and stellar motion that was made with python3.6.6
 
+**This project is very much a work in progress.**
+
 ### Features
 
 _pending_
