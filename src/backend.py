@@ -266,6 +266,8 @@ class Simulation:
                 if self.particles[i].y_coord < self.min_y:
                     self.min_y = self.particles[i].y_coord
 
+                self.log += str(self.particles[i]) + "\n"
+            self.log += "\n"
             # Print out progress of simulation after every iteration
             print("{} particles updated at t = {}".format(particles_updated, instant))
             print("{}% of calculations complete\n".format(round(((instant/self.time_step)*100/num_iters), 3)))
@@ -278,6 +280,9 @@ class Simulation:
                 self.plot_data.append([data["x"] for data in particle.data_set])
                 self.plot_data.append([data["y"] for data in particle.data_set])
 
+        with open(self.log_name, "w") as fp:
+            fp.write(self.log)
+            
         # Plot paths of all particles over total duration of simulation
         pylab.grid()
         pylab.plot(*self.plot_data)
