@@ -25,14 +25,14 @@ import time
 
 import datetime
 
-# CONSTANTS
+# CONSTANTS 1e10 = 1 * 10^10
 G = 6.67e-11 # Universal Gravitational constant
-SUN_MASS = 1.993e30 # Solar mass
-EARTH_MASS = 6e24   # Earth mass
-EARTH_VEL = 29806.079463282156  #Earth orbital velocity
-AU = 1.496e11       # Average distance of earth from sun
+SUN_MASS = 1.993e30 # Solar mass in kilograms
+EARTH_MASS = 6e24   # Earth mass in kilograms
+EARTH_VEL = 29806.079463282156  #Earth orbital velocity in metres per second
+AU = 1.496e11       # Average distance of earth from sun in metres
 EARTH_YEAR = 31536e3    # an earth year in seconds
-MOON_ORBIT_RADIUS = 3844e5 # Average distance of moon from earth
+MOON_ORBIT_RADIUS = 3844e5 # Average distance of moon from earth in metres
 
 def timer(func):
     def wrapper(*args, **kwargs):
