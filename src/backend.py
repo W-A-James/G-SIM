@@ -165,6 +165,7 @@ class GravParticle(Particle):
         Particle.__init__(self, mass, position, initial_velocity, force, name=name)
         self.fixed = fixed
         self.is_ghost = is_ghost
+        self.force_queue = {} # Entries in this queue are in the form {<GravParticle>:<Force between particles>}
 
     def distance(self, other):
         return ((self.x_coord - other.x_coord)**2 + (self.y_coord - other.y_coord)**2)**0.5
@@ -181,15 +182,28 @@ class GravParticle(Particle):
 
                 self.velocity += self.force_acting.get_dv(self.mass, d_time)
 
-            self.force_acting = Force(0,0)
+            self.force_acting = Force(0,0) # Initialize force acting on particle as zero before calculations of instantaneous force on particle
+            num_calcs = 0
             for particle in self.master.particles:
-                if particle is not self and not particle.is_ghost: 
-                    self.force_acting += Force_from_magnitude_and_direction((G*self.mass*particle.mass)/(self.distance(particle)**2), find_direction(particle.x_coord-self.x_coord, particle.y_coord-self.y_coord))
+                if (particle is not self) and (particle not in self.force_queue) and (not particle.is_ghost): 
+                    # Find gravitational force between the two particles
+                    force_between = Force_from_magnitude_and_direction((G*self.mass*particle.mass)/(self.distance(particle)**2), find_direction(particle.x_coord-self.x_coord, particle.y_coord-self.y_coord))
+                    self.force_acting += force_between
+                    particle.force_queue[self] = -1 * force_between
+                    num_calcs += 1
+            # print("Num calcs {}".format(num_calcs))
+            # print("Force Queue{}\n".format(self.force_queue))
+
+            for entry in self.force_queue:
+                self.force_acting += self.force_queue[entry]
 
             self.update_data_set()
             self.update_csv()
 
             self.current_time += d_time
+
+            # Reset force_queue for next iteration
+            self.force_queue.clear()
 
 def find_direction(x, y):
     return math.atan2(y, x)
