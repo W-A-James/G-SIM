@@ -171,7 +171,6 @@ class GravParticle(Particle):
         return ((self.x_coord - other.x_coord)**2 + (self.y_coord - other.y_coord)**2)**0.5
 
     def set_master(self, master):
-        assert isinstance(master, Simulation)
         self.master = master
 
     def update(self, d_time):
@@ -237,7 +236,6 @@ class Simulation:
     def __init__(self, *particles, sim_time, time_step):
         self.particles = particles + (NULL_PARTICLE, )
         for particle in self.particles:
-            if isinstance(particle, GravParticle):
                 particle.set_master(self)
         self.sim_time = sim_time
         self.time_step = time_step
