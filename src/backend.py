@@ -21,6 +21,7 @@ Classes defined here:
 import math
 import pylab
 import numpy as np
+import time
 
 import datetime
 
@@ -33,6 +34,14 @@ AU = 1.496e11       # Average distance of earth from sun
 EARTH_YEAR = 31536e3    # an earth year in seconds
 MOON_ORBIT_RADIUS = 3844e5 # Average distance of moon from earth
 
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        rv = func(*args, **kwargs)
+        end = time.time()
+        print(str(func) + " took " + str(end - start) + "s to run.")
+        return rv
+    return wrapper
 
 class Vector(object):
     """Base class for all vector Quantities"""
