@@ -63,7 +63,7 @@ class Vector(object):
         y_comp = magnitude * math.sin(direction)
 
         return type(self)(x_comp, y_comp)
-
+        
     def __add__(self, other):
         assert type(self) == type(other)
         return type(self)(self.x_comp + other.x_comp, self.y_comp + other.y_comp)
@@ -236,9 +236,11 @@ class Simulation:
     def __init__(self, *particles, sim_time, time_step):
         self.particles = particles + (NULL_PARTICLE, )
         for particle in self.particles:
-                particle.set_master(self)
+            particle.set_master(self)
         self.sim_time = sim_time
         self.time_step = time_step
+        self.log = ""
+        self.log_name = "Simulation_ {}.log".format((str(datetime.datetime.now())))
         self.plot_data = []
         self.max_x, self.max_y, self.min_x, self.min_y = 0, 0, 0, 0
 
@@ -274,7 +276,7 @@ class Simulation:
 
         for particle in self.particles:
             if not particle.is_ghost:
-                particle.write_to_csv()
+                # particle.write_to_csv()
 
                 # Append list of x and y positions of each particle as recorded over the entire simulation
                 self.plot_data.append([data["x"] for data in particle.data_set])
@@ -288,15 +290,14 @@ class Simulation:
         pylab.plot(*self.plot_data)
         pylab.show()
 
-# A ghost particle appended to particle list to work around issue whereby last particle in list is not
-# updated
-NULL_PARTICLE = GravParticle(1, (0,0), is_ghost=True)
+# A ghost particle appended to particle list to work around issue whereby last particle in list is not updated
+NULL_PARTICLE = GravParticle(1, (0,0), is_ghost=True, name="NULL")
 
 if __name__ == "__main__":
-    Earth = GravParticle(EARTH_MASS, (-2*AU, AU), 1.2*Velocity(EARTH_VEL, 0), name="Earth")
-    Sun = GravParticle(SUN_MASS, (-AU,0), initial_velocity=0.75*Velocity(0, 21115.293390650815), fixed=False, name="Sun")
-    Sun2 = GravParticle(SUN_MASS, (AU, 0), initial_velocity=0.75*Velocity(0, -21115.293390650815), fixed=False, name="Sun2")
-    particles = [Earth, Sun, Sun2]
-    
-    sim = Simulation(*particles, sim_time=2*EARTH_YEAR, time_step=1000)
+    from defaults import DEFAULTS
+    particles = DEFAULTS["Solar system"]
+
+    print(particles)
+
+    sim = Simulation(*particles, sim_time=0.25*EARTH_YEAR, time_step=0.025*EARTH_YEAR)
     sim.main_loop()
