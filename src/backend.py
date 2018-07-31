@@ -134,7 +134,7 @@ class Particle(object):
         self.data_set = []
         self.csv_data = "Time, x, y, velocity_mag, velocity_dir, force_mag, force_dir\n"
         self.name = name
-        self.file_name = self.name + "_" + str(datetime.datetime.now())
+        self.file_name = TEST_DIRECTORY + self.name + "_" + str(datetime.datetime.now())
 
     def update(self, d_time):
         self.x_coord += self.velocity.x_comp * d_time
@@ -251,7 +251,7 @@ class Simulation:
         self.sim_time = sim_time
         self.time_step = time_step
         self.log = ""
-        self.log_name = "Simulation_ {}.log".format((str(datetime.datetime.now())))
+        self.log_name = TEST_DIRECTORY + "Simulation_ {}.log".format((str(datetime.datetime.now())))
         self.plot_data = []
         self.max_x, self.max_y, self.min_x, self.min_y = 0, 0, 0, 0
 
