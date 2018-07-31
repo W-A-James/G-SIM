@@ -58,9 +58,15 @@ class TestVelocity(unittest.TestCase):
         self.assertRegex(str(self.d), reg_ex)
 
 class TestForce(unittest.TestCase):
-    pass
+    def setUp(self):
+        self.a = Force(100, 100)
+        self.b = Force(0, 0)
 
+    def test_get_dv(self):
+        self.assertEqual(self.a.get_dv(1, 10), Velocity(1000, 1000))
+        self.assertEqual(self.b.get_dv(100, 10000), Velocity(0,0))
 
+@unittest.skip("Unnecesary tests; All functionality tested in TestGravParticle")
 class TestParticle(unittest.TestCase):
     def setUp(self):
         self.a = Particle(1, (0,0))
