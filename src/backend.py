@@ -78,8 +78,7 @@ class Vector(object):
         return type(self)(self.x_comp - other.x_comp, self.y_comp - other.y_comp)
 
     def __eq__(self, other):
-        assert type(self) == type(other)
-        return self.x_comp == other.x_comp and self.y_comp == other.y_comp
+        return type(self) == type(other) and self.x_comp == other.x_comp and self.y_comp == other.y_comp
 
     def __rmul__(self, multiplier):
         return type(self)(multiplier*self.x_comp, multiplier*self.y_comp)
