@@ -18,13 +18,12 @@ Classes defined here:
         - Methods
             - update(time_step) -> updates velocity and position
 """
-import datetime
 import math
-import os
-import time
-
-import numpy as np
 import pylab
+import numpy as np
+import time
+import os
+import datetime
 
 # CONSTANTS 1e10 = 1 * 10^10
 G = 6.67e-11 # Universal Gravitational constant
@@ -293,9 +292,9 @@ NULL_PARTICLE = GravParticle(1, (0,0), is_ghost=True, name="NULL")
 
 if __name__ == "__main__":
     from defaults import DEFAULTS
-    particles = DEFAULTS["Solar system"]
+    particles = DEFAULTS["ISS"]
 
     print(particles)
 
-    sim = Simulation(*particles, sim_time=0.25*EARTH_YEAR, time_step=0.025*EARTH_YEAR)
+    sim = Simulation(*particles, sim_time=(1/365)*EARTH_YEAR, time_step=1)
     sim.main_loop()
