@@ -140,7 +140,7 @@ class Particle(object):
         self.current_time += d_time
 
     def __str__(self):
-        return "{} mass={}kg, at ({}, {}), velocity=({}m/s @ {}rad)".format(self.name, self.mass, self.x_coord, self.y_coord, self.velocity.magnitude, self.velocity.direction)
+        return "{} mass={}kg, pos=({}, {}), velocity=({}m/s @ {}rad), force_acting={}N @ {}rad".format(self.name, self.mass, self.x_coord, self.y_coord, self.velocity.magnitude, self.velocity.direction, self.force_acting.magnitude, self.force_acting.direction)
 
     def update_csv(self):
         self.csv_data += "{}, {}, {}, {}, {}, {}, {}\n".format(self.current_time, self.x_coord, self.y_coord, self.velocity.magnitude, self.velocity.direction, self.force_acting.magnitude, self.force_acting.direction)
