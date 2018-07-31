@@ -63,12 +63,6 @@ class Vector(object):
         self.direction = find_direction(x_comp, y_comp)
         self.unit = ""
 
-    def find_direction(self, x_comp, y_comp):
-        return math.atan2(y_comp, x_comp)
-
-    def find_magnitude(self, x_comp, y_comp):
-        return (x_comp**2 + y_comp**2)**0.5
-    
     def from_magnitude_and_direction(self, magnitude, direction):
         x_comp = magnitude * math.cos(direction)
         y_comp = magnitude * math.sin(direction)
@@ -214,9 +208,6 @@ class GravParticle(Particle):
 
             # Reset force_queue for next iteration
             self.force_queue.clear()
-
-def find_direction(x, y):
-    return math.atan2(y, x)
 
 def Force_from_magnitude_and_direction(magnitude, direction):
     x_comp = math.cos(direction) * magnitude
