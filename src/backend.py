@@ -33,6 +33,17 @@ EARTH_VEL = 29806.079463282156  #Earth orbital velocity in metres per second
 AU = 1.496e11       # Average distance of earth from sun in metres
 EARTH_YEAR = 31536e3    # an earth year in seconds
 MOON_ORBIT_RADIUS = 3844e5 # Average distance of moon from earth in metres
+ISS_MASS = 417289
+ISS_VEL = 7666.6667
+ISS_ORBIT_RADIUS = 382.5e3
+###############################################################################
+TEST_DIRECTORY = "TestData" + os.sep
+
+def find_magnitude(x_comp, y_comp):
+    return (x_comp**2 + y_comp**2)**0.5
+
+def find_direction(x, y):
+    return math.atan2(y, x)
 
 def timer(func):
     def wrapper(*args, **kwargs):
