@@ -59,8 +59,8 @@ class Vector(object):
     def __init__(self, x_comp, y_comp):
         self.x_comp = x_comp
         self.y_comp = y_comp
-        self.magnitude = self.find_magnitude(x_comp, y_comp)
-        self.direction = self.find_direction(x_comp, y_comp)
+        self.magnitude = find_magnitude(x_comp, y_comp)
+        self.direction = find_direction(x_comp, y_comp)
         self.unit = ""
 
     def find_direction(self, x_comp, y_comp):
