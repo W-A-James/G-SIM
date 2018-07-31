@@ -7,3 +7,4 @@ env
 *.code-workspace
 BINARY_STAR_SIM_SPECS.txt
 *.log
+*TestData
