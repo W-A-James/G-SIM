@@ -186,16 +186,12 @@ class GravParticle(Particle):
                 self.velocity += self.force_acting.get_dv(self.mass, d_time)
 
             self.force_acting = Force(0,0) # Initialize force acting on particle as zero before calculations of instantaneous force on particle
-            num_calcs = 0
             for particle in self.master.particles:
                 if (particle is not self) and (particle not in self.force_queue) and (not particle.is_ghost): 
                     # Find gravitational force between the two particles
                     force_between = Force_from_magnitude_and_direction((G*self.mass*particle.mass)/(self.distance(particle)**2), find_direction(particle.x_coord-self.x_coord, particle.y_coord-self.y_coord))
                     self.force_acting += force_between
                     particle.force_queue[self] = -1 * force_between
-                    num_calcs += 1
-            # print("Num calcs {}".format(num_calcs))
-            # print("Force Queue{}\n".format(self.force_queue))
 
             for entry in self.force_queue:
                 self.force_acting += self.force_queue[entry]
