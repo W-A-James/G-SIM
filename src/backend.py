@@ -18,12 +18,13 @@ Classes defined here:
         - Methods
             - update(time_step) -> updates velocity and position
 """
+import datetime
 import math
-import pylab
-import numpy as np
+import os
 import time
 
-import datetime
+import numpy as np
+import pylab
 
 # CONSTANTS 1e10 = 1 * 10^10
 G = 6.67e-11 # Universal Gravitational constant
